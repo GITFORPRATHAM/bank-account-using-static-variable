@@ -1,0 +1,55 @@
+#include <iostream>
+
+class BankAccount {
+private:
+    static int totalTransactions; // Static variable to count total transactions
+    int accountNumber;
+    double balance;
+
+public:
+    // Constructor
+    BankAccount(int accNum, double initialBalance) : accountNumber(accNum), balance(initialBalance) {}
+
+    // Static method to get total transactions
+    static int getTotalTransactions() {
+        return totalTransactions;
+    }
+
+    // Method to perform a transaction (e.g., deposit or withdrawal)
+    void performTransaction(double amount) {
+        balance += amount;
+        totalTransactions++;
+    }
+
+    // Method to display account information
+    void displayAccountInfo() const {
+        std::cout << "Account Number: " << accountNumber << std::endl;
+        std::cout << "Balance: $" << balance << std::endl;
+    }
+};
+
+// Initialize static variable outside the class
+int BankAccount::totalTransactions = 0;
+
+int main() {
+    // Create bank accounts
+    BankAccount acc1(1001, 500.0);
+    BankAccount acc2(1002, 1000.0);
+
+    // Perform transactions
+    acc1.performTransaction(200.0); // Deposit
+    acc2.performTransaction(-300.0); // Withdrawal
+
+    // Display account information
+    acc1.displayAccountInfo();
+    acc2.displayAccountInfo();
+
+    // Display total transactions
+    std::cout << "Total Transactions: " << BankAccount::getTotalTransactions() << std::endl;
+
+    return 0;
+}
+
+
+
+
